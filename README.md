@@ -1,18 +1,19 @@
 # kubernetes-helm
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/hypnoglow/kubernetes-helm.svg)]()
-[![Docker Automated buil](https://img.shields.io/docker/automated/hypnoglow/kubernetes-helm.svg)]()
-[![Docker Build Statu](https://img.shields.io/docker/build/hypnoglow/kubernetes-helm.svg)]()
+[![Docker Pulls](https://img.shields.io/docker/pulls/centosadmin/kubernetes-helm.svg)]()
+[![Docker Automated buil](https://img.shields.io/docker/automated/centosadmin/kubernetes-helm.svg)]()
+[![Docker Build Statu](https://img.shields.io/docker/build/centosadmin/kubernetes-helm.svg)]()
 
 Image providing [kubernetes](http://kubernetes.io/) tools `kubectl` and `helm`.
 
 ## Supported tags and respective `Dockerfile` links
 
-- `latest` [Dockerfile](https://github.com/hypnoglow/docker-kubernetes-helm/blob/master/Dockerfile)
-- `v2.8`, `v2.8.2` [v2.8.2/Dockerfile](https://github.com/hypnoglow/docker-kubernetes-helm/blob/2.8.2/Dockerfile)
-- `v2.7`, `v2.7.2` [v2.7.2/Dockerfile](https://github.com/hypnoglow/docker-kubernetes-helm/blob/2.7.2/Dockerfile)
-- `v2.6`, `v2.6.1` [v2.6.1/Dockerfile](https://github.com/hypnoglow/docker-kubernetes-helm/blob/2.6.1/Dockerfile)
-- `v2.5`, `v2.5.1` [v2.5.1/Dockerfile](https://github.com/hypnoglow/docker-kubernetes-helm/blob/2.5.1/Dockerfile)
+- `latest` [Dockerfile](https://github.com/centosadmin/docker-kubernetes-helm/blob/master/Dockerfile)
+- `v2.9`, `v2.9.0` [v2.9.0/Dockerfile](https://github.com/centosadmin/docker-kubernetes-helm/blob/2.9.0/Dockerfile)
+- `v2.8`, `v2.8.2` [v2.8.2/Dockerfile](https://github.com/centosadmin/docker-kubernetes-helm/blob/2.8.2/Dockerfile)
+- `v2.7`, `v2.7.2` [v2.7.2/Dockerfile](https://github.com/centosadmin/docker-kubernetes-helm/blob/2.7.2/Dockerfile)
+- `v2.6`, `v2.6.1` [v2.6.1/Dockerfile](https://github.com/centosadmin/docker-kubernetes-helm/blob/2.6.1/Dockerfile)
+- `v2.5`, `v2.5.1` [v2.5.1/Dockerfile](https://github.com/centosadmin/docker-kubernetes-helm/blob/2.5.1/Dockerfile)
 
 ## Overview
 
@@ -25,7 +26,7 @@ For example, for [Gitlab CI](https://about.gitlab.com/features/gitlab-ci-cd/):
 ...
 
 deploy-staging:
-  image: hypnoglow/kubernetes-helm
+  image: centosadmin/kubernetes-helm
   stage: deploy
   before_script:
     - kubectl config set-cluster ${KUBE_NAME} ...
@@ -44,4 +45,4 @@ deploy-staging:
 
 ## License
 
-[MIT](https://github.com/hypnoglow/docker-kubernetes-helm/blob/master/LICENSE).
+[MIT](https://github.com/centosadmin/docker-kubernetes-helm/blob/master/LICENSE).
