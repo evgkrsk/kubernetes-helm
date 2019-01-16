@@ -1,0 +1,9 @@
+stages:
+  - build_docker_images
+
+Build docker image:
+  tags:
+    - docker
+  stage: build_docker_images
+  script:
+    - .ci/docker-build.sh
