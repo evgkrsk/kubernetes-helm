@@ -7,7 +7,8 @@ I=$(git describe --tags)
 
 echo "Build $C:$I"
 
-docker build . --tag "$C:latest" --tag "$C:$I"
+docker build . --tag "$C:latest" --tag "$C:$I" --tag "$C:v$I"
 docker login -u "$docker_hub_login" -p "$docker_hub_password"
 docker push "$C:latest"
 docker push "$C:$I"
+docker push "$C:v$I"
