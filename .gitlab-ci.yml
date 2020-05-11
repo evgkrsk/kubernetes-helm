@@ -7,3 +7,5 @@ Build docker image:
   stage: build_docker_images
   script:
     - .ci/docker-build.sh
+  only:
+    - master
