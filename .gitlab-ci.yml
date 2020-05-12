@@ -9,3 +9,4 @@ Build docker image:
     - .ci/docker-build.sh
   only:
     - master
+    - tags
