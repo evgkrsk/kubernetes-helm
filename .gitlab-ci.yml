@@ -8,4 +8,5 @@ Build docker image:
   script:
     - .ci/docker-build.sh
   only:
+    - master
     - tags
