@@ -7,7 +7,7 @@ ENV MULTIWERF_VERSION 1.3.0
 ENV HELM_FILENAME helm-v${HELM_VERSION}-linux-amd64.tar.gz
 ENV KUBETAIL_VERSION 1.6.10
 
-RUN apk add -u --no-cache --virtual .deps curl bash file
+RUN apk add -u --no-cache --virtual .deps curl bash file ncurses
 
 RUN set -ex \
     && curl -sSL https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl \
