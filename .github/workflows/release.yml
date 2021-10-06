@@ -1,0 +1,72 @@
+name: Release workflow
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  docker:
+    runs-on: ubuntu-latest
+    steps:
+    -
+      name: Checkout
+      uses: actions/checkout@v2
+    -
+      name: Docker meta
+      id: meta
+      uses: docker/metadata-action@v3
+      with:
+        images: evgkrsk/kubernetes-helm
+        tags: |
+          type=ref,event=branch
+          type=ref,event=pr
+          type=semver,pattern={{version}}
+          type=semver,pattern={{major}}.{{minor}}.{{patch}}
+          type=semver,pattern={{major}}.{{minor}}
+          type=semver,pattern={{major}}
+    -
+      name: Build docker image
+      id: build
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: false
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+    -
+      name: Run Trivy vulnerability scanner (CRIT only)
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'evgkrsk/kubernetes-helm:${{ steps.meta.outputs.version }}'
+        exit-code: '1'
+        ignore-unfixed: true
+        severity: 'CRITICAL'
+    -
+      name: Run Trivy vulnerability scanner (full list)
+      uses: aquasecurity/trivy-action@master
+      with:
+        image-ref: 'evgkrsk/kubernetes-helm:${{ steps.meta.outputs.version }}'
+    -
+      name: Login to DockerHub
+      if: github.event_name != 'pull_request'
+      uses: docker/login-action@v1
+      with:
+        username: ${{ secrets.DOCKERHUB_USERNAME }}
+        password: ${{ secrets.DOCKERHUB_TOKEN }}
+    -
+      name: Push docker image
+      uses: docker/build-push-action@v2
+      with:
+        context: .
+        push: ${{ github.event_name != 'pull_request' }}
+        tags: ${{ steps.meta.outputs.tags }}
+        labels: ${{ steps.meta.outputs.labels }}
+    -
+      name: Create Release
+      if: github.event_name != 'pull_request'
+      uses: ncipollo/release-action@v1
+      with:
+        token: ${{ secrets.GITHUB_TOKEN }}
+        body: '**Docker image**: evgkrsk/kubernetes-helm:${{ steps.meta.outputs.version }}'
+        name: 'Release ${{ steps.meta.outputs.version }}'
