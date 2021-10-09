@@ -1,19 +1,15 @@
 # kubernetes-helm
 
-[![Docker Pulls](https://img.shields.io/docker/pulls/centosadmin/kubernetes-helm.svg)]()
-[![Docker Automated buil](https://img.shields.io/docker/automated/centosadmin/kubernetes-helm.svg)]()
-[![Docker Build Statu](https://img.shields.io/docker/build/centosadmin/kubernetes-helm.svg)]()
+[![Docker Pulls](https://img.shields.io/docker/pulls/evgkrsk/kubernetes-helm.svg)]()
+[![Docker Automated buil](https://img.shields.io/docker/automated/evgkrsk/kubernetes-helm.svg)]()
+[![Docker Build Statu](https://img.shields.io/docker/build/evgkrsk/kubernetes-helm.svg)]()
 
-Image providing [kubernetes](http://kubernetes.io/) tools `kubectl` and `helm`.
+Image providing [kubernetes](http://kubernetes.io/) tools `kubectl`, `helm`, `helmfile`.
 
 ## Supported tags and respective `Dockerfile` links
 
-- `latest` [Dockerfile](https://github.com/centosadmin/docker-kubernetes-helm/blob/master/Dockerfile)
-- `v2.9`, `v2.9.0` [v2.9.0/Dockerfile](https://github.com/centosadmin/docker-kubernetes-helm/blob/2.9.0/Dockerfile)
-- `v2.8`, `v2.8.2` [v2.8.2/Dockerfile](https://github.com/centosadmin/docker-kubernetes-helm/blob/2.8.2/Dockerfile)
-- `v2.7`, `v2.7.2` [v2.7.2/Dockerfile](https://github.com/centosadmin/docker-kubernetes-helm/blob/2.7.2/Dockerfile)
-- `v2.6`, `v2.6.1` [v2.6.1/Dockerfile](https://github.com/centosadmin/docker-kubernetes-helm/blob/2.6.1/Dockerfile)
-- `v2.5`, `v2.5.1` [v2.5.1/Dockerfile](https://github.com/centosadmin/docker-kubernetes-helm/blob/2.5.1/Dockerfile)
+- `latest` [Dockerfile](https://github.com/evgkrsk/kubernetes-helm/blob/master/Dockerfile)
+
 
 ## Overview
 
@@ -26,18 +22,17 @@ For example, for [Gitlab CI](https://about.gitlab.com/features/gitlab-ci-cd/):
 ...
 
 deploy-staging:
-  image: centosadmin/kubernetes-helm
+  image: evgkrsk/kubernetes-helm:0
   stage: deploy
   before_script:
-    - kubectl config set-cluster ${KUBE_NAME} ...
-    - kubectl config set-credentials ${KUBE_USER} ...
+    - kubectl config set-cluster ${KUBE_NAME}
+    - kubectl config set-credentials ${KUBE_USER}
     - kubectl config set-context ${KUBE_NAME}
         --cluster="${KUBE_NAME}"
         --user="${KUBE_USER}"
         --namespace="${KUBE_NAMESPACE}"
     - kubectl config use-context ${KUBE_NAME}
   script:
-    - helm init --client-only
     - helm install release-name chart/name --namespace ${KUBE_NAMESPACE}
 
 ...
@@ -45,4 +40,4 @@ deploy-staging:
 
 ## License
 
-[MIT](https://github.com/centosadmin/docker-kubernetes-helm/blob/master/LICENSE).
+[MIT](https://github.com/evgkrsk/kubernetes-helm/blob/master/LICENSE).
