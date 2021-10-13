@@ -37,4 +37,4 @@ RUN set -ex && \
     rm -rf /tmp/helm* && rm -rf /root/.cache/helm \
     :
 
-ENTRYPOINT ["helm"]
+CMD ["helm"]
