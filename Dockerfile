@@ -1,9 +1,9 @@
 FROM alpine:3.14
 
 ENV KUBECTL_VERSION v1.22.0
-ENV HELM_VERSION 3.7.0
+ENV HELM_VERSION 3.7.1
 ENV HELM_FILENAME helm-v${HELM_VERSION}-linux-amd64.tar.gz
-ENV HELMFILE_VERSION 0.141.0
+ENV HELMFILE_VERSION 0.142.0
 ENV PACKAGES curl bash file jq vault upx git gettext
 
 RUN apk add -u --no-cache $PACKAGES && \
