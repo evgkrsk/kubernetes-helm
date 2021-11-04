@@ -1,6 +1,6 @@
 FROM alpine:3.14
 
-ENV KUBECTL_VERSION v1.22.0
+ENV KUBECTL_VERSION 1.22.0
 ENV HELM_VERSION 3.7.1
 ENV HELM_FILENAME helm-v${HELM_VERSION}-linux-amd64.tar.gz
 ENV HELMFILE_VERSION 0.142.0
@@ -11,7 +11,7 @@ RUN apk add -u --no-cache $PACKAGES && \
     :
 
 RUN set -ex && \
-    curl -sSL https://storage.googleapis.com/kubernetes-release/release/${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
+    curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl && \
     upx -9 /usr/local/bin/kubectl && \
     :
