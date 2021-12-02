@@ -4,6 +4,7 @@ ENV PACKAGES curl bash file jq vault upx git gettext
 
 RUN apk add -u --no-cache $PACKAGES && \
     rm -rf /var/cache/apk/ && \
+    upx -9 /usr/sbin/vault && \
     :
 
 ENV KUBECTL_VERSION 1.22.4
@@ -32,7 +33,9 @@ RUN set -ex && \
 
 RUN set -ex && \
     helm plugin install https://github.com/databus23/helm-diff --version v3.1.3 && \
+    upx -9 /root/.local/share/helm/plugins/helm-diff/bin/diff && \
     helm plugin install https://github.com/jkroepke/helm-secrets --version v3.5.0 && \
+    upx -9 /usr/local/bin/sops && \
     # helm plugin install https://github.com/hypnoglow/helm-s3.git --version v0.10.0 && \
     helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.10.0 && \
     rm -rf /tmp/helm* && rm -rf /root/.cache/helm \
