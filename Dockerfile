@@ -48,4 +48,11 @@ RUN set -ex && \
     upx -9 /usr/local/bin/helmfile && \
     :
 
+ENV KUSTOMIZE_VERSION 4.4.1
+RUN set -ex && \
+    curl -sSL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xz && \
+    mv kustomize /usr/local/bin/kustomize && \
+    upx -9 /usr/local/bin/kustomize && \
+    :
+
 CMD ["helm"]
