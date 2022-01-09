@@ -7,14 +7,14 @@ RUN apk add -u --no-cache $PACKAGES && \
     upx -9 /usr/sbin/vault && \
     :
 
-ENV KUBECTL_VERSION 1.22.4
+ENV KUBECTL_VERSION 1.23.1
 RUN set -ex && \
     curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl && \
     upx -9 /usr/local/bin/kubectl && \
     :
 
-ENV WERF_VERSION 1.2.45
+ENV WERF_VERSION 1.2.53
 ENV WERF_HELM3_MODE 1
 RUN set -ex && \
     curl -sSL "https://tuf.werf.io/targets/releases/$WERF_VERSION/linux-amd64/bin/werf" -o /usr/local/bin/werf && \
@@ -32,12 +32,12 @@ RUN set -ex && \
     :
 
 RUN set -ex && \
-    helm plugin install https://github.com/databus23/helm-diff --version v3.1.3 && \
+    helm plugin install https://github.com/databus23/helm-diff --version v3.2.0 && \
     upx -9 /root/.local/share/helm/plugins/helm-diff/bin/diff && \
-    helm plugin install https://github.com/jkroepke/helm-secrets --version v3.5.0 && \
-    upx -9 /usr/local/bin/sops && \
-    # helm plugin install https://github.com/hypnoglow/helm-s3.git --version v0.10.0 && \
-    helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.10.0 && \
+    helm plugin install https://github.com/jkroepke/helm-secrets --version v3.11.0 && \
+    helm plugin install https://github.com/hypnoglow/helm-s3.git --version v0.10.0 && \
+    upx -9 /root/.local/share/helm/plugins/helm-s3.git/bin/helms3 && \
+    helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.11.1 && \
     rm -rf /tmp/helm* && rm -rf /root/.cache/helm \
     :
 
