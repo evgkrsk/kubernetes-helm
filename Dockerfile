@@ -33,7 +33,6 @@ RUN set -ex && \
 
 ENV HELM_DIFF_COLOR=true
 ENV HELM_DIFF_IGNORE_UNKNOWN_FLAGS=true
-ENV HELM_DIFF_USE_UPGRADE_DRY_RUN=true
 RUN set -ex && \
     helm plugin install https://github.com/databus23/helm-diff --version v3.3.2 && \
     upx -9 /root/.local/share/helm/plugins/helm-diff/bin/diff && \
