@@ -31,8 +31,12 @@ RUN set -ex && \
     upx -9 /usr/local/bin/helm && \
     :
 
+ENV HELM_DIFF_COLOR=true
+ENV HELM_DIFF_IGNORE_UNKNOWN_FLAGS=true
+ENV HELM_DIFF_THREE_WAY_MERGE=true
+ENV HELM_DIFF_USE_UPGRADE_DRY_RUN=true
 RUN set -ex && \
-    helm plugin install https://github.com/databus23/helm-diff --version v3.2.0 && \
+    helm plugin install https://github.com/databus23/helm-diff --version v3.3.2 && \
     upx -9 /root/.local/share/helm/plugins/helm-diff/bin/diff && \
     helm plugin install https://github.com/jkroepke/helm-secrets --version v3.11.0 && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git --version v0.10.0 && \
@@ -41,7 +45,7 @@ RUN set -ex && \
     rm -rf /tmp/helm* && rm -rf /root/.cache/helm \
     :
 
-ENV HELMFILE_VERSION 0.142.0
+ENV HELMFILE_VERSION 0.143.0
 RUN set -ex && \
     curl -sSL https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 -o /usr/local/bin/helmfile && \
     chmod +x /usr/local/bin/helmfile && \
