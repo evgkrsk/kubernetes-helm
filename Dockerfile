@@ -22,7 +22,7 @@ RUN set -ex && \
     upx -9 /usr/local/bin/werf && \
     :
 
-ENV HELM_VERSION 3.7.2
+ENV HELM_VERSION 3.8.0
 ENV HELM_FILENAME helm-v${HELM_VERSION}-linux-amd64.tar.gz
 RUN set -ex && \
     curl -sSL https://get.helm.sh/${HELM_FILENAME} | tar xz && \
