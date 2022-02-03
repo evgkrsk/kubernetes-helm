@@ -4,7 +4,8 @@
 [![Docker Automated buil](https://img.shields.io/docker/automated/evgkrsk/kubernetes-helm.svg)]()
 [![Docker Build Statu](https://img.shields.io/docker/build/evgkrsk/kubernetes-helm.svg)]()
 
-Image providing [kubernetes](http://kubernetes.io/) tools `kubectl`, `helm`, `helmfile`.
+Image providing [kubernetes](http://kubernetes.io/) tools `kubectl`,
+`helm`, `helmfile`, `kustomize`, `werf`.
 
 ## Supported tags and respective `Dockerfile` links
 
@@ -22,7 +23,7 @@ For example, for [Gitlab CI](https://about.gitlab.com/features/gitlab-ci-cd/):
 ...
 
 deploy-staging:
-  image: evgkrsk/kubernetes-helm:0
+  image: evgkrsk/kubernetes-helm
   stage: deploy
   before_script:
     - kubectl config set-cluster ${KUBE_NAME}
