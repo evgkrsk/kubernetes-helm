@@ -1,8 +1,11 @@
 FROM alpine:3.15
 
+# Working packages
 ENV PACKAGES curl bash file jq vault upx git gettext
+# Update packages to close vulns:
+ENV VULN_PACKAGES expat
 
-RUN apk add -u --no-cache $PACKAGES && \
+RUN apk add -u --no-cache $PACKAGES $VULN_PACKAGES && \
     rm -rf /var/cache/apk/ && \
     upx -9 /usr/sbin/vault && \
     :
