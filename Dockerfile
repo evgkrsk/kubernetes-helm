@@ -19,7 +19,7 @@ RUN set -ex && \
     :
 
 # rock-solid 1.2 channel: https://raw.githubusercontent.com/werf/werf/multiwerf/trdl_channels.yaml
-ENV WERF_VERSION 1.2.55
+ENV WERF_VERSION 1.2.57
 ENV WERF_HELM3_MODE 1
 RUN set -ex && \
     curl -sSL "https://tuf.werf.io/targets/releases/$WERF_VERSION/linux-amd64/bin/werf" -o /usr/local/bin/werf && \
@@ -40,7 +40,7 @@ RUN set -ex && \
 ENV HELM_DIFF_COLOR=true
 ENV HELM_DIFF_IGNORE_UNKNOWN_FLAGS=true
 RUN set -ex && \
-    helm plugin install https://github.com/databus23/helm-diff --version v3.4.0 && \
+    helm plugin install https://github.com/databus23/helm-diff --version v3.4.2 && \
     upx -9 /root/.local/share/helm/plugins/helm-diff/bin/diff && \
     helm plugin install https://github.com/jkroepke/helm-secrets --version v3.12.0 && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git --version v0.10.0 && \
@@ -58,7 +58,7 @@ RUN set -ex && \
     :
 
 # https://github.com/kubernetes-sigs/kustomize/releases
-ENV KUSTOMIZE_VERSION 4.5.1
+ENV KUSTOMIZE_VERSION 4.5.2
 RUN set -ex && \
     curl -sSL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xz && \
     mv kustomize /usr/local/bin/kustomize && \
