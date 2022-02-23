@@ -2,16 +2,15 @@ FROM alpine:3.15
 
 # Working packages
 ENV PACKAGES curl bash file jq vault upx git gettext
-# Update packages to close vulns:
-ENV VULN_PACKAGES expat
 
-RUN apk add -u --no-cache $PACKAGES $VULN_PACKAGES && \
+RUN apk upgrade --update-cache --no-cache && \
+    apk add --no-cache $PACKAGES && \
     rm -rf /var/cache/apk/ && \
     upx -9 /usr/sbin/vault && \
     :
 
 # https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ENV KUBECTL_VERSION 1.23.3
+ENV KUBECTL_VERSION 1.23.4
 RUN set -ex && \
     curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl && \
@@ -19,7 +18,7 @@ RUN set -ex && \
     :
 
 # rock-solid 1.2 channel: https://raw.githubusercontent.com/werf/werf/multiwerf/trdl_channels.yaml
-ENV WERF_VERSION 1.2.57
+ENV WERF_VERSION 1.2.59
 ENV WERF_HELM3_MODE 1
 RUN set -ex && \
     curl -sSL "https://tuf.werf.io/targets/releases/$WERF_VERSION/linux-amd64/bin/werf" -o /usr/local/bin/werf && \
