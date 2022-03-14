@@ -18,7 +18,7 @@ RUN set -ex && \
     :
 
 # rock-solid 1.2 channel: https://raw.githubusercontent.com/werf/werf/multiwerf/trdl_channels.yaml
-ENV WERF_VERSION 1.2.59
+ENV WERF_VERSION 1.2.67
 ENV WERF_HELM3_MODE 1
 RUN set -ex && \
     curl -sSL "https://tuf.werf.io/targets/releases/$WERF_VERSION/linux-amd64/bin/werf" -o /usr/local/bin/werf && \
@@ -27,7 +27,7 @@ RUN set -ex && \
     :
 
 # https://github.com/helm/helm/releases
-ENV HELM_VERSION 3.8.0
+ENV HELM_VERSION 3.8.1
 ENV HELM_FILENAME helm-v${HELM_VERSION}-linux-amd64.tar.gz
 RUN set -ex && \
     curl -sSL https://get.helm.sh/${HELM_FILENAME} | tar xz && \
@@ -45,11 +45,12 @@ RUN set -ex && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git --version v0.10.0 && \
     upx -9 /root/.local/share/helm/plugins/helm-s3.git/bin/helms3 && \
     helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.11.1 && \
+    helm plugin install https://github.com/marckhouzam/helm-fullstatus --version v0.3.0 && \
     rm -rf /tmp/helm* && rm -rf /root/.cache/helm \
     :
 
 # https://github.com/roboll/helmfile/releases
-ENV HELMFILE_VERSION 0.143.0
+ENV HELMFILE_VERSION 0.143.1
 RUN set -ex && \
     curl -sSL https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 -o /usr/local/bin/helmfile && \
     chmod +x /usr/local/bin/helmfile && \
