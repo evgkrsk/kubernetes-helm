@@ -50,7 +50,7 @@ RUN set -ex && \
     :
 
 # https://github.com/roboll/helmfile/releases
-ENV HELMFILE_VERSION 0.143.1
+ENV HELMFILE_VERSION 0.143.3
 RUN set -ex && \
     curl -sSL https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 -o /usr/local/bin/helmfile && \
     chmod +x /usr/local/bin/helmfile && \
