@@ -50,7 +50,7 @@ RUN set -ex && \
     :
 
 # https://github.com/roboll/helmfile/releases
-ENV HELMFILE_VERSION 0.143.3
+ENV HELMFILE_VERSION 0.143.4
 RUN set -ex && \
     curl -sSL https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 -o /usr/local/bin/helmfile && \
     chmod +x /usr/local/bin/helmfile && \
@@ -58,7 +58,7 @@ RUN set -ex && \
     :
 
 # https://github.com/kubernetes-sigs/kustomize/releases
-ENV KUSTOMIZE_VERSION 4.5.2
+ENV KUSTOMIZE_VERSION 4.5.3
 RUN set -ex && \
     curl -sSL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xz && \
     mv kustomize /usr/local/bin/kustomize && \
