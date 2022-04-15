@@ -3,6 +3,7 @@ name: Test workflow
 on:
   pull_request:
     branches: [master]
+  workflow_dispatch: {}
   schedule:
     - cron: "0 1 * * 5" # Every friday at 1 AM
 
