@@ -1,6 +1,5 @@
 FROM alpine:3.15.4
 RUN cat /etc/resolv.conf
-RUN echo "nameserver 8.8.8.8" > /etc/resolv.conf
 ENV PACKAGES curl bind-tools
 RUN set -ex && \
     apk upgrade --update-cache --no-cache && \
@@ -9,8 +8,7 @@ RUN set -ex && \
     :
 ENV WERF_VERSION 1.2.71
 ENV WERF_HELM3_MODE 1
-RUN host -4 tuf.werf.io
 RUN set -ex && \
-    curl -vsSL "https://tuf.werf.io/targets/releases/$WERF_VERSION/linux-amd64/bin/werf" -o /usr/local/bin/werf && \
+    curl --resolve tuf.werf.io:443:54.38.250.137,46.148.230.218,77.223.120.232 -vsSL "https://tuf.werf.io/targets/releases/$WERF_VERSION/linux-amd64/bin/werf" -o /usr/local/bin/werf && \
     chmod +x /usr/local/bin/werf && \
     :
