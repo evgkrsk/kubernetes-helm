@@ -19,6 +19,7 @@ RUN set -ex && \
     :
 
 # rock-solid 1.2 channel: https://raw.githubusercontent.com/werf/werf/multiwerf/trdl_channels.yaml
+# WORKAROUND: https://storage.googleapis.com/werf-tuf/targets/releases/$WERF_VERSION/linux-amd64/bin/werf
 ENV WERF_VERSION 1.2.71
 ENV WERF_HELM3_MODE 1
 RUN set -ex && \
