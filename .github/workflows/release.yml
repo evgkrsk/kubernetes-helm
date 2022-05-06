@@ -28,7 +28,7 @@ jobs:
     -
       name: Build docker image
       id: build
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3
       with:
         context: .
         push: false
@@ -56,7 +56,7 @@ jobs:
         password: ${{ secrets.DOCKERHUB_TOKEN }}
     -
       name: Push docker image
-      uses: docker/build-push-action@v2
+      uses: docker/build-push-action@v3
       with:
         context: .
         push: ${{ github.event_name != 'pull_request' }}
