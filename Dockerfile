@@ -11,7 +11,7 @@ RUN set -ex && \
     :
 
 # https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ENV KUBECTL_VERSION 1.23.5
+ENV KUBECTL_VERSION 1.24.0
 RUN set -ex && \
     curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl && \
@@ -20,7 +20,7 @@ RUN set -ex && \
 
 # rock-solid 1.2 channel: https://raw.githubusercontent.com/werf/werf/multiwerf/trdl_channels.yaml
 # WORKAROUND: https://storage.googleapis.com/werf-tuf/targets/releases/$WERF_VERSION/linux-amd64/bin/werf
-ENV WERF_VERSION 1.2.71
+ENV WERF_VERSION 1.2.80
 ENV WERF_HELM3_MODE 1
 RUN set -ex && \
     curl --resolve tuf.werf.io:443:54.38.250.137,46.148.230.218,77.223.120.232 -vsSL "https://tuf.werf.io/targets/releases/$WERF_VERSION/linux-amd64/bin/werf" -o /usr/local/bin/werf && \
@@ -29,7 +29,7 @@ RUN set -ex && \
     :
 
 # https://github.com/helm/helm/releases
-ENV HELM_VERSION 3.8.2
+ENV HELM_VERSION 3.9.0
 ENV HELM_FILENAME helm-v${HELM_VERSION}-linux-amd64.tar.gz
 RUN set -ex && \
     curl -sSL https://get.helm.sh/${HELM_FILENAME} | tar xz && \
@@ -41,7 +41,7 @@ RUN set -ex && \
 ENV HELM_DIFF_COLOR=true
 ENV HELM_DIFF_IGNORE_UNKNOWN_FLAGS=true
 RUN set -ex && \
-    helm plugin install https://github.com/databus23/helm-diff --version v3.4.2 && \
+    helm plugin install https://github.com/databus23/helm-diff --version v3.5.0 && \
     upx -9 /root/.local/share/helm/plugins/helm-diff/bin/diff && \
     helm plugin install https://github.com/jkroepke/helm-secrets --version v3.13.0 && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git --version v0.10.0 && \
