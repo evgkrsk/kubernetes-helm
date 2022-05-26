@@ -1,4 +1,4 @@
-FROM alpine:3.15.4
+FROM alpine:3.16.0
 
 # Working packages
 ENV PACKAGES curl bash file jq vault upx git gettext
