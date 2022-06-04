@@ -43,7 +43,7 @@ ENV HELM_DIFF_IGNORE_UNKNOWN_FLAGS=true
 RUN set -ex && \
     helm plugin install https://github.com/databus23/helm-diff --version v3.5.0 && \
     upx -9 /root/.local/share/helm/plugins/helm-diff/bin/diff && \
-    helm plugin install https://github.com/jkroepke/helm-secrets --version v3.13.0 && \
+    helm plugin install https://github.com/jkroepke/helm-secrets --version v3.14.0 && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git --version v0.11.0 && \
     upx -9 /root/.local/share/helm/plugins/helm-s3.git/bin/helms3 && \
     helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.11.1 && \
