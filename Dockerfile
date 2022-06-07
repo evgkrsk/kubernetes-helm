@@ -46,7 +46,7 @@ RUN set -ex && \
     helm plugin install https://github.com/jkroepke/helm-secrets --version v3.14.0 && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git --version v0.11.0 && \
     upx -9 /root/.local/share/helm/plugins/helm-s3.git/bin/helms3 && \
-    helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.11.1 && \
+    helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.11.2 && \
     helm plugin install https://github.com/marckhouzam/helm-fullstatus --version v0.3.0 && \
     rm -rf /tmp/helm* && rm -rf /root/.cache/helm \
     :
