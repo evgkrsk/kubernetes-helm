@@ -53,8 +53,8 @@ RUN set -ex && \
 
 ENV HELMFILE_VERSION 0.145.0
 RUN set -ex && \
-    curl -sSL https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 -o /usr/local/bin/helmfile && \
-    chmod +x /usr/local/bin/helmfile && \
+    curl -sSL https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz | tar xz && \
+    mv helmfile /usr/local/bin/helmfile && \
     upx -9 /usr/local/bin/helmfile && \
     :
 
