@@ -11,7 +11,7 @@ RUN set -ex && \
     :
 
 # https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ENV KUBECTL_VERSION 1.24.1
+ENV KUBECTL_VERSION 1.24.2
 RUN set -ex && \
     curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl && \
@@ -51,11 +51,9 @@ RUN set -ex && \
     rm -rf /tmp/helm* && rm -rf /root/.cache/helm \
     :
 
-# https://github.com/roboll/helmfile/releases
-# TODO: migrate to https://github.com/helmfile/helmfile/releases
-ENV HELMFILE_VERSION 0.144.0
+ENV HELMFILE_VERSION 0.145.0
 RUN set -ex && \
-    curl -sSL https://github.com/roboll/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 -o /usr/local/bin/helmfile && \
+    curl -sSL https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_linux_amd64 -o /usr/local/bin/helmfile && \
     chmod +x /usr/local/bin/helmfile && \
     upx -9 /usr/local/bin/helmfile && \
     :
