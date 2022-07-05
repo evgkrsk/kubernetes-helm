@@ -51,7 +51,7 @@ RUN set -ex && \
     rm -rf /tmp/helm* && rm -rf /root/.cache/helm \
     :
 
-ENV HELMFILE_VERSION 0.145.0
+ENV HELMFILE_VERSION 0.145.1
 RUN set -ex && \
     curl -sSL https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz | tar xz && \
     mv helmfile /usr/local/bin/helmfile && \
