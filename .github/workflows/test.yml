@@ -1,50 +1,52 @@
+---
 name: Test workflow
 
+# yamllint disable-line rule:truthy
 on:
   pull_request:
     branches: [master]
   workflow_dispatch: {}
   schedule:
-    - cron: "0 1 * * 5" # Every friday at 1 AM
+    - cron: "0 1 * * 5"  # Every friday at 1 AM
 
 jobs:
   test:
     runs-on: ubuntu-latest
 
     steps:
-    - uses: actions/checkout@v3
-    -
-      name: Docker meta
-      id: meta
-      uses: docker/metadata-action@v4
-      with:
-        images: evgkrsk/kubernetes-helm
-        tags: |
-          type=ref,event=branch
-          type=ref,event=pr
-          type=semver,pattern={{version}}
-          type=semver,pattern={{major}}.{{minor}}.{{patch}}
-          type=semver,pattern={{major}}.{{minor}}
-          type=semver,pattern={{major}}
-    -
-      name: Build docker image
-      id: build
-      uses: docker/build-push-action@v3
-      with:
-        context: .
-        push: false
-        tags: ${{ steps.meta.outputs.tags }}
-        labels: ${{ steps.meta.outputs.labels }}
-    -
-      name: Run Trivy vulnerability scanner (CRIT only)
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: 'evgkrsk/kubernetes-helm:${{ steps.meta.outputs.version }}'
-        exit-code: '1'
-        ignore-unfixed: true
-        severity: 'CRITICAL'
-    -
-      name: Run Trivy vulnerability scanner (full list)
-      uses: aquasecurity/trivy-action@master
-      with:
-        image-ref: 'evgkrsk/kubernetes-helm:${{ steps.meta.outputs.version }}'
+      - uses: actions/checkout@v3
+      -
+        name: Docker meta
+        id: meta
+        uses: docker/metadata-action@v4
+        with:
+          images: evgkrsk/kubernetes-helm
+          tags: |
+            type=ref,event=branch
+            type=ref,event=pr
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}.{{patch}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+      -
+        name: Build docker image
+        id: build
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: false
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+      -
+        name: Run Trivy vulnerability scanner (CRIT only)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'evgkrsk/kubernetes-helm:${{ steps.meta.outputs.version }}'
+          exit-code: '1'
+          ignore-unfixed: true
+          severity: 'CRITICAL'
+      -
+        name: Run Trivy vulnerability scanner (full list)
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: 'evgkrsk/kubernetes-helm:${{ steps.meta.outputs.version }}'
