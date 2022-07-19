@@ -1,4 +1,4 @@
-FROM alpine:3.16.0
+FROM alpine:3.16.1
 
 # Working packages
 ENV PACKAGES curl bash file jq vault upx git gettext
@@ -11,7 +11,7 @@ RUN set -ex && \
     :
 
 # https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ENV KUBECTL_VERSION 1.24.2
+ENV KUBECTL_VERSION 1.24.3
 RUN set -ex && \
     curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl && \
