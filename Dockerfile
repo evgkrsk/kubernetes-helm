@@ -60,7 +60,7 @@ RUN set -ex && \
     :
 
 # https://github.com/kubernetes-sigs/kustomize/releases
-ENV KUSTOMIZE_VERSION 4.5.6
+ENV KUSTOMIZE_VERSION 4.5.7
 RUN set -ex && \
     curl -sSL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xz && \
     mv kustomize /usr/local/bin/kustomize && \
