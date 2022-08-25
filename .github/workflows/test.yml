@@ -42,6 +42,7 @@ jobs:
           labels: ${{ steps.meta.outputs.labels }}
           cache-from: type=gha
           cache-to: type=gha,mode=max
+          load: true
       -
         name: Run Trivy vulnerability scanner (CRIT only)
         uses: aquasecurity/trivy-action@master
