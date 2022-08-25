@@ -67,9 +67,10 @@ jobs:
       -
         name: Create Release
         if: github.event_name != 'pull_request'
-        uses: ncipollo/release-action@v1
+        uses: ncipollo/release-action@v1.10.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
           # yamllint disable-line rule:line-length
           body: '**Docker image**: evgkrsk/kubernetes-helm:${{ steps.meta.outputs.version }}'
           name: 'Release ${{ steps.meta.outputs.version }}'
+          generateReleaseNotes: true
