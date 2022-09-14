@@ -52,7 +52,7 @@ RUN set -ex && \
     :
 
 # https://github.com/helmfile/helmfile/releases
-ENV HELMFILE_VERSION 0.145.4
+ENV HELMFILE_VERSION 0.145.5
 RUN set -ex && \
     curl -sSL https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz | tar xz && \
     mv helmfile /usr/local/bin/helmfile && \
