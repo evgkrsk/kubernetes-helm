@@ -29,7 +29,7 @@ RUN set -ex && \
     :
 
 # https://github.com/helm/helm/releases
-ENV HELM_VERSION 3.9.4
+ENV HELM_VERSION 3.10.0
 ENV HELM_FILENAME helm-v${HELM_VERSION}-linux-amd64.tar.gz
 RUN set -ex && \
     curl -sSL https://get.helm.sh/${HELM_FILENAME} | tar xz && \
