@@ -40,8 +40,9 @@ RUN set -ex && \
 
 ENV HELM_DIFF_COLOR=true
 ENV HELM_DIFF_IGNORE_UNKNOWN_FLAGS=true
+ENV HELM_DIFF_NORMALIZE_MANIFESTS=true
 RUN set -ex && \
-    helm plugin install https://github.com/databus23/helm-diff --version v3.5.0 && \
+    helm plugin install https://github.com/databus23/helm-diff --version v3.6.0 && \
     upx -9 /root/.local/share/helm/plugins/helm-diff/bin/diff && \
     helm plugin install https://github.com/jkroepke/helm-secrets --version v4.1.1 && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git --version v0.14.0 && \
