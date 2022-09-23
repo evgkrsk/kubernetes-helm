@@ -29,9 +29,6 @@ jobs:
             type=semver,pattern={{major}}.{{minor}}
             type=semver,pattern={{major}}
       -
-        name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v2
-      -
         name: Build docker image
         id: build
         uses: docker/build-push-action@v3
@@ -40,9 +37,6 @@ jobs:
           push: false
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-          load: true
       -
         name: Run Trivy vulnerability scanner (CRIT only)
         uses: aquasecurity/trivy-action@master

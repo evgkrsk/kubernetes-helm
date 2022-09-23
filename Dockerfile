@@ -11,7 +11,7 @@ RUN set -ex && \
     :
 
 # https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ENV KUBECTL_VERSION 1.25.1
+ENV KUBECTL_VERSION 1.25.2
 RUN set -ex && \
     curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     chmod +x /usr/local/bin/kubectl && \
@@ -20,7 +20,7 @@ RUN set -ex && \
 
 # rock-solid 1.2 channel: https://raw.githubusercontent.com/werf/werf/main/trdl_channels.yaml
 # WORKAROUND: https://storage.googleapis.com/werf-tuf/targets/releases/$WERF_VERSION/linux-amd64/bin/werf
-ENV WERF_VERSION 1.2.162+fix1
+ENV WERF_VERSION 1.2.163+fix1
 ENV WERF_HELM3_MODE 1
 RUN set -ex && \
     curl --resolve tuf.werf.io:443:54.38.250.137,46.148.230.218,77.223.120.232 -vsSL "https://tuf.werf.io/targets/releases/$WERF_VERSION/linux-amd64/bin/werf" -o /usr/local/bin/werf && \
