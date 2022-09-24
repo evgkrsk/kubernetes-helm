@@ -49,7 +49,7 @@ RUN set -ex && \
     upx -9 /root/.local/share/helm/plugins/helm-s3.git/bin/helm-s3 && \
     rm -rf /root/.local/share/helm/plugins/helm-s3.git/.git && \
     rm -rf /root/.local/share/helm/plugins/helm-s3.git/releases && \
-    helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.11.2 && \
+    helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.11.3 && \
     helm plugin install https://github.com/marckhouzam/helm-fullstatus --version v0.3.0 && \
     rm -rf /tmp/helm* && rm -rf /root/.cache/helm \
     :
