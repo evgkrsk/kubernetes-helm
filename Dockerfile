@@ -49,13 +49,13 @@ RUN set -ex && \
     upx -9 /root/.local/share/helm/plugins/helm-s3.git/bin/helm-s3 && \
     rm -rf /root/.local/share/helm/plugins/helm-s3.git/.git && \
     rm -rf /root/.local/share/helm/plugins/helm-s3.git/releases && \
-    helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.11.3 && \
+    helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.12.0 && \
     helm plugin install https://github.com/marckhouzam/helm-fullstatus --version v0.3.0 && \
     rm -rf /tmp/helm* && rm -rf /root/.cache/helm \
     :
 
 # https://github.com/helmfile/helmfile/releases
-ENV HELMFILE_VERSION 0.146.0
+ENV HELMFILE_VERSION 0.147.0
 RUN set -ex && \
     curl -sSL https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz | tar xz && \
     mv helmfile /usr/local/bin/helmfile && \
@@ -68,6 +68,14 @@ RUN set -ex && \
     curl -sSL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xz && \
     mv kustomize /usr/local/bin/kustomize && \
     upx -9 /usr/local/bin/kustomize && \
+    :
+
+# https://github.com/variantdev/vals/releases
+ENV VALS_VERSION 0.18.0
+RUN set -ex && \
+    curl -sSL https://github.com/variantdev/vals/releases/download/v${VALS_VERSION}/vals_${VALS_VERSION}_linux_amd64.tar.gz | tar xz && \
+    mv vals /usr/local/bin/vals && \
+    upx -9 /usr/local/bin/vals && \
     :
 
 CMD ["helm"]
