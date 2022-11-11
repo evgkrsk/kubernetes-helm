@@ -11,7 +11,7 @@ RUN set -ex && \
     :
 
 # https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ENV KUBECTL_VERSION 1.25.3
+ENV KUBECTL_VERSION 1.25.4
 RUN set -ex && \
     curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     file /usr/local/bin/kubectl|grep statically && \
@@ -31,7 +31,7 @@ RUN set -ex && \
     :
 
 # https://github.com/helm/helm/releases
-ENV HELM_VERSION 3.10.1
+ENV HELM_VERSION 3.10.2
 ENV HELM_FILENAME helm-v${HELM_VERSION}-linux-amd64.tar.gz
 RUN set -ex && \
     curl -sSL https://get.helm.sh/${HELM_FILENAME} | tar xz && \
@@ -47,13 +47,13 @@ ENV HELM_DIFF_NORMALIZE_MANIFESTS=true
 RUN set -ex && \
     helm plugin install https://github.com/databus23/helm-diff --version v3.6.0 && \
     upx -9 /root/.local/share/helm/plugins/helm-diff/bin/diff && \
-    helm plugin install https://github.com/jkroepke/helm-secrets --version v4.1.1 && \
+    helm plugin install https://github.com/jkroepke/helm-secrets --version v4.2.0 && \
     rm -rf /root/.local/share/helm/plugins/helm-secrets/.git && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git --version v0.14.0 && \
     upx -9 /root/.local/share/helm/plugins/helm-s3.git/bin/helm-s3 && \
     rm -rf /root/.local/share/helm/plugins/helm-s3.git/.git && \
     rm -rf /root/.local/share/helm/plugins/helm-s3.git/releases && \
-    helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.13.0 && \
+    helm plugin install https://github.com/aslafy-z/helm-git.git --version v0.14.0 && \
     helm plugin install https://github.com/marckhouzam/helm-fullstatus --version v0.3.0 && \
     rm -rf /tmp/helm* && rm -rf /root/.cache/helm && \
     :
