@@ -3,8 +3,10 @@ FROM alpine:3.16.2
 # Working packages
 ENV PACKAGES curl bash file jq vault upx git gettext
 
-RUN set -ex && \
-    apk upgrade --update-cache --no-cache && \
+SHELL ["/bin/ash", "-xeo", "pipefail", "-c"]
+
+# hadolint ignore=DL3018
+RUN apk upgrade --update-cache --no-cache && \
     apk add --no-cache $PACKAGES && \
     rm -rf /var/cache/apk/ && \
     upx -9 /usr/sbin/vault && \
@@ -12,8 +14,7 @@ RUN set -ex && \
 
 # https://storage.googleapis.com/kubernetes-release/release/stable.txt
 ENV KUBECTL_VERSION 1.25.4
-RUN set -ex && \
-    curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
+RUN curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     file /usr/local/bin/kubectl|grep statically && \
     chmod +x /usr/local/bin/kubectl && \
     upx -9 /usr/local/bin/kubectl && \
@@ -23,8 +24,7 @@ RUN set -ex && \
 # WORKAROUND: https://storage.googleapis.com/werf-tuf/targets/releases/$WERF_VERSION/linux-amd64/bin/werf
 ENV WERF_VERSION 1.2.175+fix4
 ENV WERF_HELM3_MODE 1
-RUN set -ex && \
-    curl --resolve tuf.werf.io:443:54.38.250.137,46.148.230.218,77.223.120.232 -vsSL "https://tuf.werf.io/targets/releases/$WERF_VERSION/linux-amd64/bin/werf" -o /usr/local/bin/werf && \
+RUN curl --resolve tuf.werf.io:443:54.38.250.137,46.148.230.218,77.223.120.232 -vsSL "https://tuf.werf.io/targets/releases/$WERF_VERSION/linux-amd64/bin/werf" -o /usr/local/bin/werf && \
     file /usr/local/bin/werf |grep statically && \
     chmod +x /usr/local/bin/werf && \
     upx -9 /usr/local/bin/werf && \
@@ -33,8 +33,7 @@ RUN set -ex && \
 # https://github.com/helm/helm/releases
 ENV HELM_VERSION 3.10.2
 ENV HELM_FILENAME helm-v${HELM_VERSION}-linux-amd64.tar.gz
-RUN set -ex && \
-    curl -sSL https://get.helm.sh/${HELM_FILENAME} | tar xz && \
+RUN curl -sSL https://get.helm.sh/${HELM_FILENAME} | tar xz && \
     file linux-amd64/helm |grep statically && \
     mv linux-amd64/helm /usr/local/bin/helm && \
     rm -rf linux-amd64 && \
@@ -44,8 +43,7 @@ RUN set -ex && \
 ENV HELM_DIFF_COLOR=true
 ENV HELM_DIFF_IGNORE_UNKNOWN_FLAGS=true
 ENV HELM_DIFF_NORMALIZE_MANIFESTS=true
-RUN set -ex && \
-    helm plugin install https://github.com/databus23/helm-diff --version v3.6.0 && \
+RUN helm plugin install https://github.com/databus23/helm-diff --version v3.6.0 && \
     upx -9 /root/.local/share/helm/plugins/helm-diff/bin/diff && \
     helm plugin install https://github.com/jkroepke/helm-secrets --version v4.2.0 && \
     rm -rf /root/.local/share/helm/plugins/helm-secrets/.git && \
@@ -60,8 +58,7 @@ RUN set -ex && \
 
 # https://github.com/helmfile/helmfile/releases
 ENV HELMFILE_VERSION 0.147.0
-RUN set -ex && \
-    curl -sSL https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz | tar xz && \
+RUN curl -sSL https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz | tar xz && \
     file helmfile |grep statically && \
     mv helmfile /usr/local/bin/helmfile && \
     upx -9 /usr/local/bin/helmfile && \
@@ -69,8 +66,7 @@ RUN set -ex && \
 
 # https://github.com/kubernetes-sigs/kustomize/releases
 ENV KUSTOMIZE_VERSION 4.5.7
-RUN set -ex && \
-    curl -sSL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xz && \
+RUN curl -sSL https://github.com/kubernetes-sigs/kustomize/releases/download/kustomize%2Fv${KUSTOMIZE_VERSION}/kustomize_v${KUSTOMIZE_VERSION}_linux_amd64.tar.gz | tar xz && \
     file kustomize |grep statically && \
     mv kustomize /usr/local/bin/kustomize && \
     upx -9 /usr/local/bin/kustomize && \
@@ -78,8 +74,7 @@ RUN set -ex && \
 
 # https://github.com/variantdev/vals/releases
 ENV VALS_VERSION 0.19.0
-RUN set -ex && \
-    curl -sSL https://github.com/variantdev/vals/releases/download/v${VALS_VERSION}/vals_${VALS_VERSION}_linux_amd64.tar.gz | tar xz && \
+RUN curl -sSL https://github.com/variantdev/vals/releases/download/v${VALS_VERSION}/vals_${VALS_VERSION}_linux_amd64.tar.gz | tar xz && \
     file vals |grep statically && \
     mv vals /usr/local/bin/vals && \
     upx -9 /usr/local/bin/vals && \
