@@ -1,4 +1,4 @@
-FROM alpine:3.16.3
+FROM alpine:3.16.2
 
 # Working packages
 ENV PACKAGES curl bash file jq vault upx git gettext
@@ -57,7 +57,7 @@ RUN helm plugin install https://github.com/databus23/helm-diff --version v3.6.0 
     :
 
 # https://github.com/helmfile/helmfile/releases
-ENV HELMFILE_VERSION 0.148.0
+ENV HELMFILE_VERSION 0.148.1
 RUN curl -sSL https://github.com/helmfile/helmfile/releases/download/v${HELMFILE_VERSION}/helmfile_${HELMFILE_VERSION}_linux_amd64.tar.gz | tar xz && \
     file helmfile |grep statically && \
     mv helmfile /usr/local/bin/helmfile && \
