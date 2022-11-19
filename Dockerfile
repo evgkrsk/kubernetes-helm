@@ -1,4 +1,4 @@
-FROM alpine:3.16.2
+FROM alpine:3.16.3
 
 # Working packages
 ENV PACKAGES curl bash file jq vault upx git gettext
@@ -22,7 +22,7 @@ RUN curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBEC
 
 # rock-solid 1.2 channel: https://raw.githubusercontent.com/werf/werf/main/trdl_channels.yaml
 # WORKAROUND: https://storage.googleapis.com/werf-tuf/targets/releases/$WERF_VERSION/linux-amd64/bin/werf
-ENV WERF_VERSION 1.2.175+fix4
+ENV WERF_VERSION 1.2.181+fix3
 ENV WERF_HELM3_MODE 1
 RUN curl --resolve tuf.werf.io:443:54.38.250.137,46.148.230.218,77.223.120.232 -vsSL "https://tuf.werf.io/targets/releases/$WERF_VERSION/linux-amd64/bin/werf" -o /usr/local/bin/werf && \
     file /usr/local/bin/werf |grep statically && \
@@ -45,7 +45,7 @@ ENV HELM_DIFF_IGNORE_UNKNOWN_FLAGS=true
 ENV HELM_DIFF_NORMALIZE_MANIFESTS=true
 RUN helm plugin install https://github.com/databus23/helm-diff --version v3.6.0 && \
     upx -9 /root/.local/share/helm/plugins/helm-diff/bin/diff && \
-    helm plugin install https://github.com/jkroepke/helm-secrets --version v4.2.0 && \
+    helm plugin install https://github.com/jkroepke/helm-secrets --version v4.2.1 && \
     rm -rf /root/.local/share/helm/plugins/helm-secrets/.git && \
     helm plugin install https://github.com/hypnoglow/helm-s3.git --version v0.14.0 && \
     upx -9 /root/.local/share/helm/plugins/helm-s3.git/bin/helm-s3 && \
