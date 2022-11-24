@@ -22,7 +22,7 @@ RUN curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBEC
 
 # rock-solid 1.2 channel: https://raw.githubusercontent.com/werf/werf/main/trdl_channels.yaml
 # WORKAROUND: https://storage.googleapis.com/werf-tuf/targets/releases/$WERF_VERSION/linux-amd64/bin/werf
-ENV WERF_VERSION 1.2.181+fix3
+ENV WERF_VERSION 1.2.184
 ENV WERF_HELM3_MODE 1
 RUN curl --resolve tuf.werf.io:443:54.38.250.137,46.148.230.218,77.223.120.232 -vsSL "https://tuf.werf.io/targets/releases/$WERF_VERSION/linux-amd64/bin/werf" -o /usr/local/bin/werf && \
     file /usr/local/bin/werf |grep statically && \
