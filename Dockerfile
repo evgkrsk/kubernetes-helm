@@ -73,7 +73,7 @@ RUN curl -sSL https://github.com/kubernetes-sigs/kustomize/releases/download/kus
     :
 
 # https://github.com/variantdev/vals/releases
-ENV VALS_VERSION 0.19.0
+ENV VALS_VERSION 0.20.0
 RUN curl -sSL https://github.com/variantdev/vals/releases/download/v${VALS_VERSION}/vals_${VALS_VERSION}_linux_amd64.tar.gz | tar xz && \
     file vals |grep statically && \
     mv vals /usr/local/bin/vals && \
