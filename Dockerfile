@@ -13,7 +13,7 @@ RUN apk upgrade --update-cache --no-cache && \
     :
 
 # https://storage.googleapis.com/kubernetes-release/release/stable.txt
-ENV KUBECTL_VERSION 1.25.4
+ENV KUBECTL_VERSION 1.26.0
 RUN curl -sSL https://storage.googleapis.com/kubernetes-release/release/v${KUBECTL_VERSION}/bin/linux/amd64/kubectl -o /usr/local/bin/kubectl && \
     file /usr/local/bin/kubectl|grep statically && \
     chmod +x /usr/local/bin/kubectl && \
@@ -73,7 +73,7 @@ RUN curl -sSL https://github.com/kubernetes-sigs/kustomize/releases/download/kus
     :
 
 # https://github.com/variantdev/vals/releases
-ENV VALS_VERSION 0.20.0
+ENV VALS_VERSION 0.21.0
 RUN curl -sSL https://github.com/variantdev/vals/releases/download/v${VALS_VERSION}/vals_${VALS_VERSION}_linux_amd64.tar.gz | tar xz && \
     file vals |grep statically && \
     mv vals /usr/local/bin/vals && \
