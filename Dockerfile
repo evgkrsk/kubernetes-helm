@@ -31,7 +31,7 @@ RUN curl --resolve tuf.werf.io:443:54.38.250.137,46.148.230.218,77.223.120.232 -
     :
 
 # https://github.com/helm/helm/releases
-ENV HELM_VERSION 3.10.2
+ENV HELM_VERSION 3.10.3
 ENV HELM_FILENAME helm-v${HELM_VERSION}-linux-amd64.tar.gz
 RUN curl -sSL https://get.helm.sh/${HELM_FILENAME} | tar xz && \
     file linux-amd64/helm |grep statically && \
